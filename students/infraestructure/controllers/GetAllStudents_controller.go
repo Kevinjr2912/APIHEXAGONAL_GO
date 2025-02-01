@@ -24,7 +24,7 @@ func (gas_c *GetAllStudentsController) Run(ctx *gin.Context) {
 		return
 	}
 
-	 response := responses.NewGetAllStudentsController(students)
+	 response := responses.NewResponseGetAllStudents(students)
 
 	 ctx.JSON(http.StatusOK, response)
 }

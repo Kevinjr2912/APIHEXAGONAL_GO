@@ -5,41 +5,41 @@ import (
 	"fmt"
 )
 
-type StudentAttributesCreated struct {
+type StudentAttributesUpdated struct {
 	Name        string `json:"name"`
 	Age        	string  `json:"age"`
 	PhoneNumber string `json:"phoneNumber"`
 }
 
-type StudentLinksCreated struct {
+type StudentLinksUpdated struct {
 	Self string `json:"self"`
 }
 
-type ResponseStudentCreated struct {
+type ResponseCreatedStudentUpdated struct {
 	Data struct {
 		Type       string                   `json:"type"`
 		Id         string                   `json:"id"`
-		Attributes StudentAttributesCreated `json:"attributes"`
-		Links      StudentLinksCreated      `json:"links"`
+		Attributes StudentAttributesUpdated `json:"attributes"`
+		Links      StudentLinksUpdated      `json:"links"`
 	} `json:"data"`
 }
 
-func NewResponseStudentCreated(student *entities.Student) *ResponseStudentCreated {
-	return &ResponseStudentCreated{
+func NewResponseStudentUpdated(id int64, student *entities.Student) *ResponseCreatedStudentUpdated {
+	return &ResponseCreatedStudentUpdated{
 		Data: struct {
 			Type       string                   `json:"type"`
 			Id         string                   `json:"id"`
-			Attributes StudentAttributesCreated `json:"attributes"`
-			Links      StudentLinksCreated      `json:"links"`
+			Attributes StudentAttributesUpdated `json:"attributes"`
+			Links      StudentLinksUpdated      `json:"links"`
 		}{
 			Type: "Students",
-			Id:   fmt.Sprintf("%d", student.Id),
-			Attributes: StudentAttributesCreated{
+			Id:   fmt.Sprintf("%d", id),
+			Attributes: StudentAttributesUpdated{
 				Name:        student.Name,
 				Age:         fmt.Sprintf("%d", student.Age),
 				PhoneNumber: fmt.Sprintf("%d", student.PhoneNumber), 
 			},
-			Links: StudentLinksCreated{
+			Links: StudentLinksUpdated{
 				Self: fmt.Sprintf("http://localhost:8080/students/%d", student.Id),
 			},
 		},

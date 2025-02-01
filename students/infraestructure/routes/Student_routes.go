@@ -13,8 +13,10 @@ func StudentRouter(router *gin.Engine) {
 	// Instanciamos los controladores
 	createStudentController := infraestructure.CreateStudentController().Run
 	getAllStudentsController := infraestructure.GetAllStudentsController().Run
+	updateStudentController := infraestructure.UpdateStudentController().Run
 
 	// Definimos las rutas
 	routes.POST("", createStudentController)
 	routes.GET("", getAllStudentsController)
+	routes.PUT("/:id", updateStudentController)
 }

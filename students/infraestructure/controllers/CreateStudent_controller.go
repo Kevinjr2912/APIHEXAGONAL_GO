@@ -26,6 +26,11 @@ func (cs_c *CreateStudentController) Run(ctx *gin.Context) {
 		return
 	}
 
+	if student.Name == "" && student.Age <= 0 && student.PhoneNumber <= 0 {
+		ctx.JSON(http.StatusBadRequest, gin.H{"Error": "Los campos están vacíos o son inválidos"})
+		return
+	}
+
 	id, err := cs_c.useCase.Run(&student)
 
 	if err != nil {
@@ -40,7 +45,7 @@ func (cs_c *CreateStudentController) Run(ctx *gin.Context) {
 	// Reasignamos el id del estudiante
 	student.Id = id
 
-	response := responses.NewResponseCreatedStudent(&student)
+	response := responses.NewResponseStudentCreated(&student)
 
 	ctx.JSON(http.StatusCreated, response)
 }
