@@ -13,7 +13,13 @@ func Init() {
 
 // Casos de uso
 func CreateStudentController() *controllers.CreateStudentController {
-	useCaseCreateStuden := application.NewCreateStudent(myql)
+	useCaseCreateStudent := application.NewCreateStudent(myql)
 
-	return controllers.NewCreateStudentController(useCaseCreateStuden)
+	return controllers.NewCreateStudentController(useCaseCreateStudent)
+}
+
+func GetAllStudentsController() *controllers.GetAllStudentsController {
+	useCaseGetAllStudents := application.NewGetAllStudents(myql)
+
+	return controllers.NewGetAllStudentsController(useCaseGetAllStudents)
 }
