@@ -5,7 +5,9 @@ import (
 	"api-hexagonal/students/infraestructure/controllers"
 )
 
-var myql *MySQL
+var (
+	myql *MySQL
+)
 
 func Init() {
 	myql = NewMySQL()
