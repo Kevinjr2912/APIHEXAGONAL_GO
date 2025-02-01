@@ -40,7 +40,7 @@ func (cs_c *CreateStudentController) Run(ctx *gin.Context) {
 	// Reasignamos el id del estudiante
 	student.Id = id
 
-	responseCreatedStudent := responses.NewResponseCreatedStudent(&student)
+	response := responses.NewResponseCreatedStudent(&student)
 
-	ctx.JSON(http.StatusCreated, responseCreatedStudent)
+	ctx.JSON(http.StatusCreated, response)
 }

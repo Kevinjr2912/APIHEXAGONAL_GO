@@ -38,3 +38,30 @@ func (mysql *MySQL) CreateStudent(student *entities.Student) (id int64, err erro
 
 	return id, nil
 }
+
+func (mysql *MySQL) GetAllStudents() (studentsArray *[]entities.Student, err error){
+	var students []entities.Student
+	var student entities.Student
+
+	query := "SELECT * FROM students"
+
+	rows := mysql.conn.FetchRows(query)
+
+	defer rows.Close()
+
+	for rows.Next() {
+		
+		if err := rows.Scan(&student.Id, &student.Name, &student.Age, &student.PhoneNumber); err != nil {
+			return nil, fmt.Errorf("Error al escanear la fila: %w", err)
+		}
+
+		students = append(students, student)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("Error después de iterar sobre las filas: %w", err)
+	}
+
+	return &students, nil
+
+}
