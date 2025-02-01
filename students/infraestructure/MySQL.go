@@ -65,3 +65,26 @@ func (mysql *MySQL) GetAllStudents() (studentsArray *[]entities.Student, err err
 	return &students, nil
 
 }
+
+func (mysql *MySQL) UpdateStudent(id int64, student *entities.Student) (err error) {
+	query := "UPDATE students SET name = ?,  age = ?, phone_number = ? WHERE id_student = ?"
+
+	result, err := mysql.conn.ExecutePreparedQuery(query, student.Name, student.Age, student.PhoneNumber, id)
+
+	if err != nil {
+		return fmt.Errorf("Error al ejecutar la consulta: %v", err)
+	}
+
+	rowsAffected, err := result.RowsAffected()
+
+	if err != nil {
+		return fmt.Errorf("Error al obtner las filas afectadas: %v", err)
+	}
+
+	if rowsAffected == 0 {
+        return fmt.Errorf("Ningún registro actualizado")
+    }
+
+	return nil
+
+}

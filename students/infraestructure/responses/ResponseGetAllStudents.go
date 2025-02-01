@@ -24,7 +24,7 @@ type ResponseGetAllStudents struct {
 	Data  []ResponseDataStudents `json:"data"`
 }
 
-func NewGetAllStudentsController(students *[]entities.Student) *ResponseGetAllStudents {
+func NewResponseGetAllStudents(students *[]entities.Student) *ResponseGetAllStudents {
 	data := []ResponseDataStudents{}
 
 	for i := 0; i < len(*students); i++ {
@@ -32,9 +32,9 @@ func NewGetAllStudentsController(students *[]entities.Student) *ResponseGetAllSt
 			Type: "Students",
 			Id:   fmt.Sprintf("%d", (*students)[i].Id),
 			Attributes: struct {
-				Name        string `json:"name"`
+				Name        string  `json:"name"`
 				Age         string  `json:"age"`
-				PhoneNumber string `json:"phoneNumber"`
+				PhoneNumber string  `json:"phoneNumber"`
 			}{
 				Name:        fmt.Sprintf((*students)[i].Name),
 				Age:         fmt.Sprintf("%d", (*students)[i].Age),

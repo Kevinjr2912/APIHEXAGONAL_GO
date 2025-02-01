@@ -5,6 +5,6 @@ import "api-hexagonal/students/domain/entities"
 type IStudent interface {
 	CreateStudent(student *entities.Student) (id int64, err error)
 	GetAllStudents() (studentsArray *[]entities.Student, err error)
-	// UpdateStudent()
+	UpdateStudent(id int64, student *entities.Student) (err error)
 	// DeleteStudent()
 }
