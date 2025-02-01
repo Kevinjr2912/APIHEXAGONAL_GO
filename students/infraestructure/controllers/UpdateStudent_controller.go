@@ -4,7 +4,6 @@ import (
 	"api-hexagonal/students/application"
 	"api-hexagonal/students/domain/entities"
 	"api-hexagonal/students/infraestructure/responses"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -32,7 +31,7 @@ func (us_c *UpdateStudentController) Run(ctx *gin.Context) {
 	idInt, err := strconv.ParseInt(idStr, 10, 64)
 
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, gin.H{"Error": fmt.Sprintf("Id inválido: %s", err.Error())})
+		ctx.JSON(http.StatusBadRequest, gin.H{"Error": "Id inválido"})
 		return
 	}
 

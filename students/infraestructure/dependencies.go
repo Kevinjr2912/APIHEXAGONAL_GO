@@ -33,3 +33,10 @@ func UpdateStudentController() *controllers.UpdateStudentController {
 
 	return controllers.NewUpdateStudentController(useCaseUpdateStudent)
 }
+
+// Eliminar un estudiante
+func DeleteStudentController() *controllers.DeleteStudentController {
+	useCaseDeleteStudent := application.NewDeleteStudent(myql)
+
+	return controllers.NewDeleteStudentController(useCaseDeleteStudent)
+}

@@ -78,13 +78,36 @@ func (mysql *MySQL) UpdateStudent(id int64, student *entities.Student) (err erro
 	rowsAffected, err := result.RowsAffected()
 
 	if err != nil {
-		return fmt.Errorf("Error al obtner las filas afectadas: %v", err)
+		return fmt.Errorf("Error al obtener las filas afectadas: %v", err)
 	}
 
 	if rowsAffected == 0 {
-        return fmt.Errorf("Ningún registro actualizado")
+        return fmt.Errorf("No se encontró un estudiante con el ID proporcionado para actualizar su información")
     }
 
 	return nil
 
+}
+
+
+func (mysql *MySQL) DeleteStudent(id int64) (err error) {
+	query := "DELETE FROM students WHERE id_student = ?"
+
+	result, err := mysql.conn.ExecutePreparedQuery(query, id)
+
+    if err != nil {
+        return fmt.Errorf("Error al ejecutar la consulta: %v", err)
+    }
+
+    rowsAffected, err := result.RowsAffected()
+
+    if err != nil {
+		return fmt.Errorf("Error al obtner las filas afectadas: %v", err)
+	}
+
+	if rowsAffected == 0 {
+        return fmt.Errorf("No se encontró un estudiante con el ID proporcionado para eliminar")
+    }
+
+    return nil
 }
