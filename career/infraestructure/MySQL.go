@@ -38,3 +38,30 @@ func (mysql *MySQL) CreateCareer(career *entities.Career) (id int64, err error){
 
 	return id, nil
 }
+
+func (mysql *MySQL) GetAllCareers() (careersArray *[]entities.Career, err error) {
+	var careers []entities.Career
+	var career entities.Career 
+
+	query := "SELECT * FROM careers"
+
+	rows := mysql.conn.FetchRows(query)
+
+	defer rows.Close()
+
+	for rows.Next() {
+
+		if err := rows.Scan(&career.Id, &career.Name, &career.Duration, &career.Type); err != nil {
+			return nil, fmt.Errorf("Error al escanear la fila: %w", err)
+		}
+
+		careers = append(careers, career)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("Error después de iterar sobre las filas: %w", err)
+	}
+
+	return &careers, nil
+	
+}

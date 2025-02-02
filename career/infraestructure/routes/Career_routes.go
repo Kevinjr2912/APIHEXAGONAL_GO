@@ -12,8 +12,10 @@ func CareerRouter(router *gin.Engine) {
 
 	// Instanciamos los controladores
 	createCareerController := infraestructure.CreateCareerController().Run
+	getAllCareersController := infraestructure.GetAllCareersController().Run
 
 	// Definimos las rutas
 	routes.POST("", createCareerController)
+	routes.GET("", getAllCareersController)
 	
 }
