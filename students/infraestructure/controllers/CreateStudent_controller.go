@@ -40,6 +40,7 @@ func (cs_c *CreateStudentController) Run(ctx *gin.Context) {
 
 	// Definimos los encabezados
 	ctx.Writer.Header().Set("Content-Type", "application/vnd.api+json")
+	
 	ctx.Writer.Header().Set("Location", fmt.Sprintf("http://localhost:8080/students/%d", id))
 
 	// Reasignamos el id del estudiante
