@@ -6,7 +6,7 @@ import (
 )
 
 type ResponseLinkStudents struct {
-	Links string `json:"links"`
+	Self string `json:"self"`
 }
 
 type ResponseDataStudents struct {
@@ -45,7 +45,7 @@ func NewResponseGetAllStudents(students *[]entities.Student) *ResponseGetAllStud
 
 	return &ResponseGetAllStudents{
 		Links: ResponseLinkStudents{
-			Links: "http://localhost:8080/students/getAllStudents",
+			Self: "http://localhost:8080/students/getAllStudents",
 		},
 		Data: data,
 	}
