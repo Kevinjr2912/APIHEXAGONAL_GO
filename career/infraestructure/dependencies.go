@@ -28,3 +28,10 @@ func GetAllCareersController() *controllers.GetAllCareersController  {
 
 	return controllers.NewGetAllCareersController(useCaseGetAllCareers)
 }
+
+// Actualizar la información de una carrera
+func UpdateCareerController() *controllers.UpdateCareerController {
+	useCaseUpdateCareer := application.NewUpdateCareer(mysql)
+
+	return controllers.NewUpdateCareerController(useCaseUpdateCareer)
+}

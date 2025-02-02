@@ -82,7 +82,7 @@ func (mysql *MySQL) UpdateStudent(id int64, student *entities.Student) (err erro
 	}
 
 	if rowsAffected == 0 {
-        return fmt.Errorf("No se encontró un estudiante con el ID proporcionado para actualizar su información")
+        return fmt.Errorf("No se encontró un estudiante con el Id proporcionado para actualizar su información")
     }
 
 	return nil

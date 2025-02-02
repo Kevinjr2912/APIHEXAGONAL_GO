@@ -65,3 +65,25 @@ func (mysql *MySQL) GetAllCareers() (careersArray *[]entities.Career, err error)
 	return &careers, nil
 	
 }
+
+func (mysql *MySQL) UpdateCareer(id int64, career *entities.Career) (err error) {
+	query := "UPDATE careers SET name = ?, duration = ?, type = ? WHERE id_career = ?"
+
+	result, err := mysql.conn.ExecutePreparedQuery(query, career.Name, career.Duration, career.Type, id)
+
+	if err != nil {
+		return fmt.Errorf("Error al ejecutar la consulta: %v", err)
+	}
+
+	rowsAffected, err := result.RowsAffected()
+
+	if err != nil {
+		return fmt.Errorf("Error al obtener las filas afectadas: %v", err)
+	}
+
+	if rowsAffected == 0 {
+        return fmt.Errorf("No se encontró una carrea con el Id proporcionado para actualizar su información")
+    }
+
+	return nil	
+}

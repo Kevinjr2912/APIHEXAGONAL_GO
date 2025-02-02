@@ -15,7 +15,7 @@ type StudentLinksUpdated struct {
 	Self string `json:"self"`
 }
 
-type ResponseCreatedStudentUpdated struct {
+type ResponseStudentUpdated struct {
 	Data struct {
 		Type       string                   `json:"type"`
 		Id         string                   `json:"id"`
@@ -24,8 +24,8 @@ type ResponseCreatedStudentUpdated struct {
 	} `json:"data"`
 }
 
-func NewResponseStudentUpdated(id int64, student *entities.Student) *ResponseCreatedStudentUpdated {
-	return &ResponseCreatedStudentUpdated{
+func NewResponseStudentUpdated(id int64, student *entities.Student) *ResponseStudentUpdated {
+	return &ResponseStudentUpdated{
 		Data: struct {
 			Type       string                   `json:"type"`
 			Id         string                   `json:"id"`
