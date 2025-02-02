@@ -106,7 +106,7 @@ func (mysql *MySQL) DeleteStudent(id int64) (err error) {
 	}
 
 	if rowsAffected == 0 {
-        return fmt.Errorf("No se encontró un estudiante con el ID proporcionado para eliminar")
+        return fmt.Errorf("No se encontró un estudiante con el Id proporcionado para eliminarlo")
     }
 
     return nil

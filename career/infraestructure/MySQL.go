@@ -87,3 +87,25 @@ func (mysql *MySQL) UpdateCareer(id int64, career *entities.Career) (err error) 
 
 	return nil	
 }
+
+func (mysql *MySQL) DeleteCareer(id int64) (err error) {
+	query := "DELETE FROM careers WHERE id_career = ?"
+
+	result, err := mysql.conn.ExecutePreparedQuery(query, id)
+
+    if err != nil {
+        return fmt.Errorf("Error al ejecutar la consulta: %v", err)
+    }
+
+    rowsAffected, err := result.RowsAffected()
+
+    if err != nil {
+		return fmt.Errorf("Error al obtner las filas afectadas: %v", err)
+	}
+
+	if rowsAffected == 0 {
+        return fmt.Errorf("No se encontró una carrera con el Id proporcionado para eliminarla")
+    }
+
+    return nil
+}
