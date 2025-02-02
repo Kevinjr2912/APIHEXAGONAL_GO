@@ -14,8 +14,17 @@ func Init() {
 }
 
 // Casos de uso
-func CreateCareerController() *controllers.CreateCareerController {
-	useCase := application.NewCreateCareer(mysql)
 
-	return controllers.NewCreateCareerController(useCase)
+// Crear una carrera
+func CreateCareerController() *controllers.CreateCareerController {
+	useCaseCreateCareer := application.NewCreateCareer(mysql)
+
+	return controllers.NewCreateCareerController(useCaseCreateCareer)
+}
+
+// Obtener todas las carreras
+func GetAllCareersController() *controllers.GetAllCareersController  {
+	useCaseGetAllCareers := application.NewGetAllCareers(mysql)
+
+	return controllers.NewGetAllCareersController(useCaseGetAllCareers)
 }
