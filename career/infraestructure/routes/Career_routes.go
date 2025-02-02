@@ -14,10 +14,12 @@ func CareerRouter(router *gin.Engine) {
 	createCareerController := infraestructure.CreateCareerController().Run
 	getAllCareersController := infraestructure.GetAllCareersController().Run
 	updateCareerController := infraestructure.UpdateCareerController().Run
+	deleteCareerController := infraestructure.DeleteCareerController().Run
 
 	// Definimos las rutas
 	routes.POST("", createCareerController)
 	routes.GET("", getAllCareersController)
 	routes.PUT("/:id", updateCareerController)
+	routes.DELETE("/:id", deleteCareerController)
 	
 }

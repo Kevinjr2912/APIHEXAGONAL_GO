@@ -35,3 +35,10 @@ func UpdateCareerController() *controllers.UpdateCareerController {
 
 	return controllers.NewUpdateCareerController(useCaseUpdateCareer)
 }
+
+// Eliminar una carrera
+func DeleteCareerController() *controllers.DeleteCareerController {
+	useCaseDeleteCareer := application.NewDeleteCareer(mysql)
+
+	return controllers.NewDeleteCareerController(useCaseDeleteCareer)
+}
