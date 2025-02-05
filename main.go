@@ -1,11 +1,12 @@
 package main
 
 import (
-	studentInfra "api-hexagonal/students/infraestructure"
 	careerInfra "api-hexagonal/career/infraestructure"
-	studentRoutes	"api-hexagonal/students/infraestructure/routes"
-	careerRoutes	"api-hexagonal/career/infraestructure/routes"
-	
+	careerRoutes "api-hexagonal/career/infraestructure/routes"
+	"api-hexagonal/core"
+	studentInfra "api-hexagonal/students/infraestructure"
+	studentRoutes "api-hexagonal/students/infraestructure/routes"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,9 +17,11 @@ func main() {
 	// Creamos el router
 	r := gin.Default()
 
+	// CORS
+	core.InitCORS(r)
+
 	studentRoutes.StudentRouter(r)
 	careerRoutes.CareerRouter(r)
-
 
 	// Levantamos el servidor
 	r.Run()

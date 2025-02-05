@@ -7,7 +7,7 @@ import (
 
 type StudentAttributesCreated struct {
 	Name        string `json:"name"`
-	Age        	string  `json:"age"`
+	Age         string `json:"age"`
 	PhoneNumber string `json:"phoneNumber"`
 }
 
@@ -37,7 +37,7 @@ func NewResponseStudentCreated(student *entities.Student) *ResponseStudentCreate
 			Attributes: StudentAttributesCreated{
 				Name:        student.Name,
 				Age:         fmt.Sprintf("%d", student.Age),
-				PhoneNumber: fmt.Sprintf("%d", student.PhoneNumber), 
+				PhoneNumber: fmt.Sprintf("%d", student.PhoneNumber),
 			},
 			Links: StudentLinksCreated{
 				Self: fmt.Sprintf("http://localhost:8080/students/%d", student.Id),
