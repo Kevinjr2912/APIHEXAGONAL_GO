@@ -29,6 +29,12 @@ func GetAllStudentsController() *controllers.GetAllStudentsController {
 	return controllers.NewGetAllStudentsController(useCaseGetAllStudents)
 }
 
+func FindByIdController() *controllers.FindByIdController {
+	useCaseFindById := application.NewFindById(myql)
+
+	return controllers.NewFindByIdController(useCaseFindById)
+}
+
 // Actualizar la información de un estudiante
 func UpdateStudentController() *controllers.UpdateStudentController {
 	useCaseUpdateStudent := application.NewUpdateStudent(myql)

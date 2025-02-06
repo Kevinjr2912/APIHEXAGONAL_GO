@@ -66,6 +66,32 @@ func (mysql *MySQL) GetAllStudents() (studentsArray *[]entities.Student, err err
 
 }
 
+
+func (mysql *MySQL) FindById(id int64) (studentR *entities.Student, err error) {
+	var student entities.Student
+
+	query := "SELECT * FROM students WHERE id_student = ?"
+
+	rows := mysql.conn.FetchRows(query, id)
+
+	defer rows.Close()
+
+	for rows.Next() {
+
+		if err := rows.Scan(&student.Id, &student.Name, &student.Age, &student.PhoneNumber); err != nil {
+			return nil, fmt.Errorf("Error al escanear la fila: %w", err)
+		}
+
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("Error después de iterar sobre las filas: %w", err)
+	}
+
+	return &student, nil
+
+}
+
 func (mysql *MySQL) UpdateStudent(id int64, student *entities.Student) (err error) {
 	query := "UPDATE students SET name = ?,  age = ?, phone_number = ? WHERE id_student = ?"
 
