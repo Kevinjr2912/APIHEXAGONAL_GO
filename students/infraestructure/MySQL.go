@@ -5,6 +5,7 @@ import (
 	"api-hexagonal/students/domain/entities"
 	"fmt"
 	"log"
+	"time"
 )
 
 type MySQL struct {
@@ -66,6 +67,38 @@ func (mysql *MySQL) GetAllStudents() (studentsArray *[]entities.Student, err err
 
 }
 
+func (mysql *MySQL) GetStudentUpdatedAt(id int64) (time.Time, error) {
+	var updatedAt time.Time
+	var err error
+
+	query := "SELECT updated_at FROM students WHERE id_student = ?"
+
+	row := mysql.conn.FetchRows(query, id)
+	
+	defer row.Close()
+
+	for row.Next() {
+		var updatedAtBytes []byte
+		if err := row.Scan(&updatedAtBytes); err != nil {
+			return time.Time{}, fmt.Errorf("Error al obtener updated_at: %v", err)
+		}
+
+		updatedAt, err = time.Parse("2006-01-02 15:04:05", string(updatedAtBytes))
+		if err != nil {
+			return time.Time{}, fmt.Errorf("Error al convertir updated_at: %v", err)
+		}
+	}
+
+	if err := row.Err(); err != nil {
+		return time.Time{}, fmt.Errorf("Error al iterar sobre la fila: %v", err)
+	}
+
+	return updatedAt, nil
+}
+
+
+
+
 func (mysql *MySQL) FindById(id int64) (studentR *entities.Student, err error) {
 	var student entities.Student
 
@@ -118,7 +151,7 @@ func (mysql *MySQL) FindByAge(age uint8) (studentsArray *[]entities.Student, err
 }
 
 func (mysql *MySQL) UpdateStudent(id int64, student *entities.Student) (err error) {
-	query := "UPDATE students SET name = ?,  age = ?, phone_number = ? WHERE id_student = ?"
+	query := "UPDATE students SET name = ?, age = ?, phone_number = ?, updated_at = CURRENT_TIMESTAMP WHERE id_student = ?"
 
 	result, err := mysql.conn.ExecutePreparedQuery(query, student.Name, student.Age, student.PhoneNumber, id)
 
