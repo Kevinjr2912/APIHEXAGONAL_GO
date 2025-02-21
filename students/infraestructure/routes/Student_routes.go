@@ -14,6 +14,7 @@ func StudentRouter(router *gin.Engine) {
 	createStudentController := infraestructure.CreateStudentController().Run
 	getAllStudentsController := infraestructure.GetAllStudentsController().Run
 	findByIdController := infraestructure.FindByIdController().Run
+	findByAgeController := infraestructure.FindByAgeController().Run
 	updateStudentController := infraestructure.UpdateStudentController().Run
 	deleteStudentController := infraestructure.DeleteStudentController().Run
 
@@ -21,6 +22,7 @@ func StudentRouter(router *gin.Engine) {
 	routes.POST("", createStudentController)
 	routes.GET("", getAllStudentsController)
 	routes.GET("/:id", findByIdController)
+	routes.GET("/age/:age", findByAgeController)
 	routes.PUT("/:id", updateStudentController)
 	routes.DELETE("/:id", deleteStudentController)
 }

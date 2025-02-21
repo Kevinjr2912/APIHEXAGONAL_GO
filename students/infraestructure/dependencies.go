@@ -35,6 +35,13 @@ func FindByIdController() *controllers.FindByIdController {
 	return controllers.NewFindByIdController(useCaseFindById)
 }
 
+// Encontrar estudiantes por edad
+func FindByAgeController() *controllers.FindByAgeController {
+	useCaseFindByAge := application.NewFindByAge(myql)
+
+	return controllers.NewFindByAgeController(useCaseFindByAge)
+}
+
 // Actualizar la información de un estudiante
 func UpdateStudentController() *controllers.UpdateStudentController {
 	useCaseUpdateStudent := application.NewUpdateStudent(myql)
