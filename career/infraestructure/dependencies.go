@@ -29,6 +29,13 @@ func GetAllCareersController() *controllers.GetAllCareersController  {
 	return controllers.NewGetAllCareersController(useCaseGetAllCareers)
 }
 
+// Notificar a todos los clientes de la existencia de nuevas carreras
+func NotifyNewCareerController() *controllers.NotifyNewCareerController {
+	useCaseGetAllCareers := application.NewGetAllCareers(mysql)
+
+	return controllers.NewNotifyCareerController(useCaseGetAllCareers)
+}
+
 // Actualizar la información de una carrera
 func UpdateCareerController() *controllers.UpdateCareerController {
 	useCaseUpdateCareer := application.NewUpdateCareer(mysql)

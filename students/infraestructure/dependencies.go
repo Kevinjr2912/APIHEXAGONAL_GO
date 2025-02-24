@@ -52,6 +52,13 @@ func FindByAgeController() *controllers.FindByAgeController {
 	return controllers.NewFindByAgeController(useCaseFindByAge)
 }
 
+// Notificar a los clientes conectados cuando haya o hayan nuevos estudiantes
+func NotifyNewStudentController() *controllers.NotifyNewStudentController {
+	useCaseGetAllStudents := application.NewGetAllStudents(myql)
+
+	return controllers.NewNotifyStudentController(useCaseGetAllStudents)
+}
+
 // Actualizar la información de un estudiante
 func UpdateStudentController() *controllers.UpdateStudentController {
 	useCaseUpdateStudent := application.NewUpdateStudent(myql)

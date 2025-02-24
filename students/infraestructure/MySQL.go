@@ -44,7 +44,7 @@ func (mysql *MySQL) GetAllStudents() (studentsArray *[]entities.Student, err err
 	var students []entities.Student
 	var student entities.Student
 
-	query := "SELECT * FROM students"
+	query := "SELECT id_student,name,age,phone_number FROM students"
 
 	rows := mysql.conn.FetchRows(query)
 
@@ -70,11 +70,9 @@ func (mysql *MySQL) GetAllStudents() (studentsArray *[]entities.Student, err err
 func (mysql *MySQL) GetStudentUpdatedAt(id int64) (time.Time, error) {
 	var updatedAt time.Time
 	var err error
-
 	query := "SELECT updated_at FROM students WHERE id_student = ?"
 
 	row := mysql.conn.FetchRows(query, id)
-	
 	defer row.Close()
 
 	for row.Next() {

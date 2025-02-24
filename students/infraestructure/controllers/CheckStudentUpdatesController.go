@@ -19,12 +19,14 @@ func NewCheckStudentUpdatesController(useCase *application.CheckStudentUpdates) 
 
 func (csuc *CheckStudentUpdatesController) Run(ctx *gin.Context) {
 	idStr, exists := ctx.Params.Get("id")
+
 	if !exists {
 		ctx.JSON(http.StatusBadRequest, gin.H{"Error": "Id no proporcionado"})
 		return
 	}
 
 	idInt, err := strconv.ParseInt(idStr, 10, 64)
+	
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"Error": "Id inválido"})
 		return
